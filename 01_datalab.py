@@ -27,6 +27,7 @@ if __name__=="__main__":
     print('{:=<80}'.format(f'=== chromedriver dir : {driver_path} '))
     print("{:=<80}".format(f'=== crawling csv dir : {DOWNLOAD_DIR} '))
 
+
     # 크롬 드라이버 인스턴스 생성
     chrome = generate_chrome( driver_path=driver_path, headless=False, download_path=DOWNLOAD_DIR )
     
@@ -57,19 +58,83 @@ if __name__=="__main__":
             elm = chrome.find_element_by_css_selector('#popup1 > div.modal-foot > div > a.button.bg-blue.modal-close')
             elm.click()
             time.sleep(big_lap)
+
+            # # Click year btn at the top of the calandar(default is current year, 2022)
+            # start_months = chrome.find_element_by_xpath('//*[@id="MonthPicker_monthStart"]/div[1]/table/tbody/tr/td[2]/a/span')
+            # # Click year btn on the calandar (2016-2027, 3x4 number of buttons)
+            # start_months = chrome.find_element_by_xpath('//*[@id="MonthPicker_monthStart"]/div[2]/table/tbody/tr[1]/td[3]/a/span')
+
+            # Click month btn on the calandar (1-12, 3x4 number of buttons)
+            # start_months = chrome.find_element_by_xpath('')
+            # start_months = chrome.find_element_by_xpath('//*[@id="MonthPicker_monthStart"]/div[2]/table/tbody/tr[2]/td[1]/a')
+            # start_months = chrome.find_element_by_xpath('//*[@id="MonthPicker_monthEnd"]/div[2]/table/tbody/tr[4]/td[3]/a')
+
+            start_month_input = 1
+            end_month_input   = 3
+            start_months      = chrome.find_elements_by_xpath('//*[@id="MonthPicker_monthStart"]/div[2]/table/tbody/*/*')
+            end_months        = chrome.find_elements_by_xpath('//*[@id="MonthPicker_monthEnd"]/div[2]/table/tbody/*/*')
+            start_month_btn   = start_months[start_month_input-1]
+            end_month_btn     = end_months[end_month_input-1]
+
+            # Click start date input btn(drop down pop up window)
+            set_start_date = chrome.find_element_by_xpath('//*[@id="monthStart"]')
+            set_start_date.click()
+            time.sleep(mid_lap)
+
+            # Click previous/next year btn at the top of the calandar(default is current year, 2022)
+            previous_year_btn = chrome.find_element_by_xpath('//*[@id="MonthPicker_monthStart"]/div[1]/table/tbody/tr/td[1]/a')
+            previous_year_btn.click()
+            time.sleep(mid_lap)
+
+            # Click start month btn
+            start_month_btn.click()
+            time.sleep(mid_lap)
+            print(f'시작일 설정 : {start_month_input}월')
+
+            # Click start date input btn(drop down pop up window)
+            set_end_date = chrome.find_element_by_xpath('//*[@id="monthEnd"]')
+            set_end_date.click()
+            time.sleep(mid_lap)
+
+            previous_year_btn = chrome.find_element_by_xpath('//*[@id="MonthPicker_monthEnd"]/div[1]/table/tbody/tr/td[1]/a')
+            # next_year_btn     = chrome.find_element_by_xpath('//*[@id="MonthPicker_monthEnd"]/div[1]/table/tbody/tr/td[3]/a') # if start 2015
+            previous_year_btn.click()
+            time.sleep(mid_lap)
             
-            # Click start date btn
-
-            # Click end date btn
-
+            # Click end month btn
+            end_month_btn.click()
+            time.sleep(mid_lap)
+            print(f'종료일 설정 : {end_month_input}월')
+            
             # Click inquiry btn
+            inquiry_date = chrome.find_element_by_xpath('//*[@id="searchWrap"]/div[1]/input')
+            inquiry_date.click()
+            time.sleep(big_lap)
 
-            
             
             # After all crawling, click the select location btn
             elm = chrome.find_element_by_css_selector('#area-select')
             elm.send_keys(Keys.ENTER)
             time.sleep(mid_lap)
+            
+            break
+        break
 
     time.sleep(mid_lap)
     # elm.click()
+
+    
+    """
+    (1,1), (1,2), (1,3)
+    (2,1), (2,2), (2,3)
+    (3,1), (3,2), (3,3)
+    (4,1), (4,2), (4,3)
+    """
+    tmp = list()
+    for i in range(1,5):
+        for j in range(1,4):
+            tmp.append([i,j])
+        # print(tmp)
+        # tmp = list()
+    inputdate = 5
+    print(tmp[inputdate-1])
