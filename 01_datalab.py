@@ -33,7 +33,13 @@ if __name__=="__main__":
     small_lap = 0.2
     mid_lap   = 0.5
     big_lap   = 1
-    # 로그인하여 매출페이지로 이동
     url = 'https://datalab.visitkorea.or.kr/datalab/portal/loc/getAreaDataForm.do'
     chrome.get(url)
     time.sleep(big_lap)
+
+    elm = chrome.find_element_by_css_selector('#area-select')
+    elm.send_keys(Keys.ENTER)
+    time.sleep(mid_lap)
+
+    time.sleep(big_lap)
+    # elm.click()
