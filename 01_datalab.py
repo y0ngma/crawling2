@@ -96,10 +96,10 @@ if __name__=="__main__":
             set_end_date.click()
             time.sleep(mid_lap)
 
-            previous_year_btn = chrome.find_element_by_xpath('//*[@id="MonthPicker_monthEnd"]/div[1]/table/tbody/tr/td[1]/a')
-            # next_year_btn     = chrome.find_element_by_xpath('//*[@id="MonthPicker_monthEnd"]/div[1]/table/tbody/tr/td[3]/a') # if start 2015
-            previous_year_btn.click()
-            time.sleep(mid_lap)
+            # previous_year_btn = chrome.find_element_by_xpath('//*[@id="MonthPicker_monthEnd"]/div[1]/table/tbody/tr/td[1]/a')
+            # # next_year_btn     = chrome.find_element_by_xpath('//*[@id="MonthPicker_monthEnd"]/div[1]/table/tbody/tr/td[3]/a') # if start 2015
+            # previous_year_btn.click()
+            # time.sleep(mid_lap)
             
             # Click end month btn
             end_month_btn.click()
