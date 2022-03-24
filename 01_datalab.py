@@ -37,25 +37,36 @@ if __name__=="__main__":
     chrome.get(url)
     time.sleep(big_lap)
 
+    # Click the select location btn
     elm = chrome.find_element_by_css_selector('#area-select')
     elm.send_keys(Keys.ENTER)
     time.sleep(mid_lap)
 
+    # For loop of all sido btn
     sido_group = chrome.find_element_by_xpath('//*[@id="popup1"]/div[2]/div[1]/div')
     sidos = sido_group.find_elements_by_xpath('.//*/*')
     for sido in sidos[:-1]:
         sido.click()
         time.sleep(small_lap)
-        
+        # For loop of all sigungu btn
         sigungus = chrome.find_elements_by_xpath('//*[@id="popup1"]/div[2]/div[2]/div/*/*')
         for sigungu in sigungus:
             sigungu.click()
             time.sleep(small_lap)
-
+            # Click inquiry btn and wait for loading
             elm = chrome.find_element_by_css_selector('#popup1 > div.modal-foot > div > a.button.bg-blue.modal-close')
             elm.click()
             time.sleep(big_lap)
+            
+            # Click start date btn
 
+            # Click end date btn
+
+            # Click inquiry btn
+
+            
+            
+            # After all crawling, click the select location btn
             elm = chrome.find_element_by_css_selector('#area-select')
             elm.send_keys(Keys.ENTER)
             time.sleep(mid_lap)
